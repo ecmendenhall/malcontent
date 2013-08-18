@@ -9,7 +9,7 @@
                             "AppleWebKit/537.36 (KHTML, like Gecko) "
                             "Chrome/28.0.1500.95 Safari/537.36"))
 
-(def mock-request  {:headers {"User-Agent" user-agent-string}})
+(def mock-request  {:headers {"user-agent" user-agent-string}})
 
 (def chrome  {:version [28 0 1500 95] :name "Chrome" :family "CHROME"})
 (def firefox {:version [23] :name "Firefox" :family "FIREFOX"})
