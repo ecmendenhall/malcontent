@@ -6,14 +6,14 @@ Malcontent is a simple middleware handler for adding the CSP header to Ring appl
 ## Usage
 Malcontent looks for a policy file at `config/security_policy.clj`. Here are the examples from the [HTML5 Rocks introduction to CSP](http://www.html5rocks.com/en/tutorials/security/content-security-policy/#real-world-usage) as malcontent maps:
 
-### Social media widgets:
+_Social media widgets:_
     {:sources {:script ["https://apis.google.com"
                         "https://platform.twitter.com"]
                :frame  ["https://plusone.google.com"
                         "https://facebook.com"
                         "https://platform.twitter.com"]}}
 
-### Lockdown
+_Lockdown_
     {:sources {:default :none
                :script  "https://cdn.mybank.net"
                :style   "https://cdn.mybank.net"
@@ -21,27 +21,32 @@ Malcontent looks for a policy file at `config/security_policy.clj`. Here are the
                :connect "https://api.mybank.com"
                :frame   :self}}
 
-### SSL Only
+_SSL Only_
     {:sources {:default "https:"
                :script  ["https:" :unsafe-inline]
                :style   ["https:" :unsafe-inline]}}
 
-In addition to sources, policy maps may include the `:sandbox` and `:report-uri` directives. Sources may be specified as strings, keywords, or vectors. Here's an example with every directive:
-    {:sources {:default :self
-               :script ["https://trustedscripts.com" :unsafe-eval]
-               :style ["*.styles.example.com"
-                       "https://inlinestyles.info"
-                       :unsafe-inline]
-               :img "*"
-               :connect "https:"
-               :font "http://webfonts.biz"
-               :object :none
-               :media ["http://media.example.com"]
-               :frame :self}
-     :sandbox [:allow-forms
-               :allow-scripts
-               :allow-top-navigation]
-     :report-uri "/some/report-uri"}
+In addition to sources, policy maps may include the `:sandbox` and
+`:report-uri` directives. Sources may be specified as strings,
+keywords, or vectors. Here's an example with every directive enabled:
+
+```
+{:sources {:default :self
+           :script ["https://trustedscripts.com" :unsafe-eval]
+           :style ["*.styles.example.com"
+                   "https://inlinestyles.info"
+                   :unsafe-inline]
+           :img "*"
+           :connect "https:"
+           :font "http://webfonts.biz"
+           :object :none
+           :media ["http://media.example.com"]
+           :frame :self}
+ :sandbox [:allow-forms
+           :allow-scripts
+           :allow-top-navigation]
+ :report-uri "/some/report-uri"}
+```
 
 Mapping [CSP directives](http://content-security-policy.com/) to Clojure values is simple: special values like `'self'`, `'none'`, and `'unsafe-inline'` become keywords, while sources like `https:` `*.example.com` and `https://example.com` become strings.
 
@@ -60,16 +65,17 @@ For help writing a good security policy, check out the resources below.
                  
 ## Installation
 Include malcontent as a dependency in `project.clj`:
+
     [malcontent "0.1.0-SNAPSHOT"]
 
 ## Content Security Policy Resources
-[CSP Playground](http://www.cspplayground.com/) &em; interactive examples of common CSP violations and a policy validator.
-[HTML5 Rocks introduction to CSP](http://www.html5rocks.com/en/tutorials/security/content-security-policy/) &em; a helpful overview of CSP use cases.
-[CSP quick reference](http://content-security-policy.com/) &em; a CSP directive cheat sheet.
-[Cross-browser support](http://caniuse.com/contentsecuritypolicy) &em; the current state of cross-browser CSP support.
-[Policy recommendation bookmarklet](http://brandon.sternefamily.net/posts/2010/10/content-security-policy-recommendation-bookmarklet/) &em; a one-click tool that analyzes existing pages and generates a policy recommendation.
-[Automated policy generator](http://cspisawesome.com/) &em; create a valid policy online by clicking helpful checkboxes.
-[W3C CSP 1.0 specification](http://www.w3.org/TR/CSP/) &em; straight from the source.
+- [CSP Playground](http://www.cspplayground.com/) &mdash; interactive examples of common CSP violations and a policy validator.
+- [HTML5 Rocks introduction to CSP](http://www.html5rocks.com/en/tutorials/security/content-security-policy/) &mdash; a helpful overview of CSP use cases.
+- [CSP quick reference](http://content-security-policy.com/) &mdash; a CSP directive cheat sheet.
+- [Cross-browser support](http://caniuse.com/contentsecuritypolicy) &mdash; the current state of cross-browser CSP support.
+- [Policy recommendation bookmarklet](http://brandon.sternefamily.net/posts/2010/10/content-security-policy-recommendation-bookmarklet/) &mdash; a one-click tool that analyzes existing pages and generates a policy recommendation.
+- [Automated policy generator](http://cspisawesome.com/) &mdash; create a valid policy online by clicking helpful checkboxes.
+- [W3C CSP 1.0 specification](http://www.w3.org/TR/CSP/) &mdash; straight from the source.
 
 ## License
 Malcontent is released under the Apache License, v2.0. For details, see the file `LICENSE.md` in this repository.
