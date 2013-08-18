@@ -6,14 +6,16 @@ Malcontent is a simple middleware handler for adding the CSP header to Ring appl
 ## Usage
 Malcontent looks for a policy file at `config/security_policy.clj`. Here are the examples from the [HTML5 Rocks introduction to CSP](http://www.html5rocks.com/en/tutorials/security/content-security-policy/#real-world-usage) as malcontent maps:
 
-_Social media widgets:_
+__Social media widgets:__
+
     {:sources {:script ["https://apis.google.com"
                         "https://platform.twitter.com"]
                :frame  ["https://plusone.google.com"
                         "https://facebook.com"
                         "https://platform.twitter.com"]}}
 
-_Lockdown_
+__Lockdown:__
+
     {:sources {:default :none
                :script  "https://cdn.mybank.net"
                :style   "https://cdn.mybank.net"
@@ -21,7 +23,7 @@ _Lockdown_
                :connect "https://api.mybank.com"
                :frame   :self}}
 
-_SSL Only_
+__SSL Only__:
     {:sources {:default "https:"
                :script  ["https:" :unsafe-inline]
                :style   ["https:" :unsafe-inline]}}
