@@ -24,6 +24,7 @@ __Lockdown:__
                :frame   :self}}
 
 __SSL Only__:
+
     {:sources {:default "https:"
                :script  ["https:" :unsafe-inline]
                :style   ["https:" :unsafe-inline]}}
