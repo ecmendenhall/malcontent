@@ -1,4 +1,6 @@
 # Malcontent
+[![Build Status](https://travis-ci.org/ecmendenhall/malcontent.png)](https://travis-ci.org/ecmendenhall/malcontent)
+
 Content Security Policy is a new browser security mechanism to prevent [cross site scripting](https://www.owasp.org/index.php/Top_10_2013-A3-Cross-Site_Scripting_(XSS\)) attacks. By sending a 'Content-Security-Policy' header in HTTP responses, web applications can provide rules and restrictions for client side scripts, plugins, frames, and other resources to be enforced by the browser. Whitelisting trusted resources effectively shuts down most XSS attacks, and it already works in [most modern browsers](http://caniuse.com/contentsecuritypolicy).
 
 Malcontent is a simple middleware handler for adding the CSP header to Ring applications. Simply specify a security policy as a Clojure map and malcontent will include it in responses to supported browsers.
