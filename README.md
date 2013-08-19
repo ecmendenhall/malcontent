@@ -13,7 +13,7 @@ javascript, and effectively shutting down most XSS attacks.
 Malcontent is a simple middleware handler for adding the CSP header to Ring applications. Simply specify a security policy as a Clojure map and malcontent will include it in responses to supported browsers.
 
 ## Usage
-Malcontent looks for a policy file at `config/security_policy.clj`. Here are the examples from the [HTML5 Rocks introduction to CSP](http://www.html5rocks.com/en/tutorials/security/content-security-policy/#real-world-usage) as malcontent maps:
+Malcontent looks for a policy file at `config/security_policy.clj` by default (but you can pass in your own path if you'd prefer). Here are the examples from the [HTML5 Rocks introduction to CSP](http://www.html5rocks.com/en/tutorials/security/content-security-policy/#real-world-usage) as malcontent maps:
 
 __Social media widgets:__
 
@@ -73,6 +73,11 @@ To include the policy in outgoing responses, just include `add-content-security-
     (def app (-> routes
                  (add-content-security-policy)))
 
+If you'd prefer to load the policy from somewhere besides the default location, pass it as a keyword argument:
+
+    (def app (-> routes
+                 (add-content-security-policy :config-path "resources/policy.clj")))
+
 For help writing a good security policy, check out the resources below.
                  
 ## Installation
@@ -88,6 +93,10 @@ Include malcontent as a dependency in `project.clj`:
 - [Policy recommendation bookmarklet](http://brandon.sternefamily.net/posts/2010/10/content-security-policy-recommendation-bookmarklet/) &mdash; a one-click tool that analyzes existing pages and generates a policy recommendation.
 - [Automated policy generator](http://cspisawesome.com/) &mdash; create a valid policy online by clicking helpful checkboxes.
 - [W3C CSP 1.0 specification](http://www.w3.org/TR/CSP/) &mdash; straight from the source.
+
+## More to come...
+- Map custom policies to individual routes.
+- Add a default logger for policy violations.
 
 ## License
 Malcontent is released under the Apache License, v2.0. For details, see the file `LICENSE.md` in this repository.
